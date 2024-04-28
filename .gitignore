@@ -1,0 +1,22 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+renv
+*.fastq.gz
+*.fq.gz
+*.bam
+*.cram
+.Rprofile
