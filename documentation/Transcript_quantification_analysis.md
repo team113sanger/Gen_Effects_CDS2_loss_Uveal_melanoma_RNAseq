@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the steps taken to quantify the abundances of transcripts on the RNAseq data generated from the transcriptome of  _CDS2_ targeted samples. The data from both _CDS2_ targeting experiments was quantified using `Kallisto` version `0.51.1` and the `GRCh38` human reference genome. The quantification was performed using the `kallisto quant` function.
+This document describes the steps taken to quantify the abundances of transcripts on the RNAseq data generated from the transcriptome of all the samples. The data from both _CDS2_ targeting experiments was quantified using `kallisto 0.51.1` and the ENSEMBLv103 annotation of the `GRCh38` human reference genome. The quantification was performed using the `kallisto quant` function.
 
 All the scripts and code mentioned below can be found in the `scripts/expression` directory.
 
@@ -13,11 +13,12 @@ The following software is required to be installed and visible in the path befor
 - **singularity** version `3.11.4` [**here**](https://sylabs.io/singularity/)
 - **samtools**: `v1.14` [**here**](https://github.com/samtools/samtools)
 - **kallisto:** kallisto `0.51.1` [**here**](https://github.com/pachterlab/kallisto/tree/v0.51.1)
-- ENSEMBL VEP version `103`[**here**](http://feb2021.archive.ensembl.org/info/docs/tools/vep/index.html)
+-Dataset
+  - ENSEMBL version `103`[**here**](http://feb2021.archive.ensembl.org)
 
 ### Generation of the Kallisto singularity image
 
-The instructions of how to generate a singularity image with the software kallisto `0.51.1` can be found in the [Kallisto_image_obtention.md](../scripts/singularity_images/kallisto/Kallisto_image_obtention.md) file.
+The instructions of how to generate a singularity image that contains `kallisto 0.51.1` can be found in the [Kallisto_image_obtention.md](../scripts/singularity_images/kallisto/Kallisto_image_obtention.md) file.
 
 ### R environment
 
@@ -62,7 +63,7 @@ wget https://ftp.ensembl.org/pub/release-103/fasta/homo_sapiens/dna/Homo_sapiens
 wget https://ftp.ensembl.org/pub/release-103/gtf/homo_sapiens/Homo_sapiens.GRCh38.103.gtf.gz
 # CDNA FASTAS
 wget https://ftp.ensembl.org/pub/release-103/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
-#NC RNA FASTAS
+# NC RNA FASTAS
 wget https://ftp.ensembl.org/pub/release-103/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz
 zcat ${ENSV103_DIR}/Homo_sapiens.GRCh38.cdna.all.fa.gz ${ENSV103_DIR}/Homo_sapiens.GRCh38.ncrna.fa.gz | gzip - >${ENSV103_DIR}/Homo_sapiens.GRCh38.103.rna.fa.gz
 
@@ -96,7 +97,7 @@ source ${PROJECTDIR}/scripts/expression/source_me.sh
 # Path to the human reference genome used
 HUMSQE_REF="/lustre/scratch125/core/sciops_repository/references/Homo_sapiens/GRCh38_full_analysis_set_plus_decoy_hla/all/fasta/Homo_sapiens.GRCh38_full_analysis_set_plus_decoy_hla.fa"
 
-#This script takes the cram manifest 
+#This script takes the manifest 
 Rscript ${PROJECTDIR}/scripts/expression/bamtofastq_from_manifest.R --manifest ${METADATADIR}/manifests/${STUDY}_cram_manifest_INFO_from_iRODS_all_wbam_counts_qc_wNOD_bams_finalbams.txt --projectdir ${PROJECTDIR} --studyID ${STUDY:?unset} --mem 16000 --ref ${HUMSQE_REF:?unset}
 
 ```
@@ -152,10 +153,8 @@ module load singularity/3.11.4
 #This script takes the cram manifest 
 Rscript ${PROJECTDIR}/scripts/expression/make_kallisto_jobs_from_manifest.R --manifest ${METADATADIR:?unset}/manifests/${STUDY}_cram_manifest_INFO_from_iRODS_all_wbam_counts_qc_wNOD_bams_finalbams_fqs.txt --projectdir ${PROJECTDIR:?unset} --studyID ${STUDY:?unset} --index ${KALLISTO_INDEX:?unset} --kallisto ${KALLISTO_DIR:?unset}/kallisto_0.51.1.sif --mem 16000
 
-# Runt he script
-bash ${PROJECTDIR}/scripts/${STUDY}_kallisto_final_jobs.sh
 ```
-OUTPUTS:
+**OUTPUTS**:
 - `scripts/7687_kallisto_final_jobs.sh` shell script with the `lsf bsub` commands to run the quantification of the samples
 
 #### Run transcript abundance quantification with Kallisto quant

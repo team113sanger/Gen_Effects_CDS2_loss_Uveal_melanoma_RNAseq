@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the steps taken to align and filter out mouse reads from Human BAM files from Xenografted samples. Mapping parameters used to align reads against the Human GRCh38 reference genome with **ENSEMBLv103 annotation** and the mouse reference used [NOD_V1_PDX](../reference/NOD_ShiLtJ_V1_PDX_ref/README.md)with **ENSEMBL v107** annotation were the same.
+This document describes the steps taken to align and filter out mouse reads from Human BAM files from Xenografted samples. Mapping parameters used to align reads against the Human GRCh38 reference genome with **ENSEMBLv103 annotation** and the custom mouse reference [NOD_V1_PDX](../reference/NOD_ShiLtJ_V1_PDX_ref/README.md) with **ENSEMBL v107** annotation were the same.
 
 All the scripts and code mentioned below can be found in the `scripts` directory.
 
@@ -18,13 +18,13 @@ This process was used to remove mouse reads from the Human BAM files with the tr
 
 The following environment variables are required to be set before running the scripts:
 - **PROJECTDIR**: The path to the project directory where this repo got cloned into
-- **STUDY**: The study ID,  7688 for this analysis
-- **PROJECTID**: The project ID, 3365s for this analysis
+- **STUDY**: The study ID,  7687 for this analysis
+- **PROJECTID**: The project ID, 3364s for this analysis
 
 The following software is required to be installed and visible in the path before running the scripts:
 - **R**: R `4.2.2`[**here**](https://cran.r-project.org/)
-- **STAR**: STAR `2.7.10a` [**here**](https://github.com/alexdobin/STAR/tree/2.7.10a)
-
+- **STAR**: STAR `2.7.10a`[**here**](https://github.com/alexdobin/STAR/tree/2.7.10a)
+- **XenofilteR**: XenofilteR `v1.6`[**here**](https://github.com/NKI-GCF/XenofilteR/releases/tag/v1.6)
 
 - Load the following variables and software
 ```bash
@@ -37,7 +37,7 @@ PROJECTID=3364
 source ${PROJECTDIR:?unset}/scripts/pdx_processing/source_me.sh
 ```
 #### R environment
-If you're interested in reproducing the R environment, for a the code used in R 4.2.2 run the following commands within `R v4.2.2`, change the path on `projectdir` to the path where the repository was cloned into:
+If you're interested in reproducing the R environment, for a the code used in R 4.2.2 run the following commands within `R4.2.2`, change the path on `projectdir` to the path where the repository was cloned into:
 
 ```R
 projectdir<-"/lustre/7687_3364_Gen_Effects_CDS2_loss_Uveal_melanoma_RNAseq"
@@ -76,18 +76,18 @@ mkdir -p ${PROJECTDIR:?unset}/metadata/manifests
 Rscript ${PROJECTDIR:?unset}/scripts/pdx_processing/Build_manifest_from_irods_cram_information.R --seqscape_proj_id ${STUDY} --outdir ${PROJECTDIR:?unset}/metadata/manifests
 ```
 
-- After generating the manifest, we split the information to only contain the Xenografted samples (CDS2_Tumour) 
-
-**OUTPUTS**:
-- **7687_cram_manifest_INFO_from_iRODS_all.txt** : Contains the information of all the samples across both SW837 and OMM2.5 targeting experiments.
-- **7687_cram_manifest_INFO_from_iRODS.txt** : Contains the information of the samples on the OMM2.5 targeting experiments.
-
 ```bash 
 # Reformat the manifest and filter 
 #Then keep only the  CDS2_Tumour samples and the header 
 mv ${PROJECTDIR:?unset}/metadata/manifests/${STUDY}_cram_manifest_INFO_from_iRODS.txt ${PROJECTDIR:?unset}/metadata/manifests/${STUDY}_cram_manifest_INFO_from_iRODS_all.txt
 grep -E 'CDS2_Tumour|sample' ${PROJECTDIR:?unset}/metadata/manifests/${STUDY}_cram_manifest_INFO_from_iRODS_all.txt >${PROJECTDIR:?unset}/metadata/manifests/${STUDY}_cram_manifest_INFO_from_iRODS.txt
 ```
+
+- After generating the manifest, we split the information to only contain the Xenografted samples (CDS2_Tumour) 
+
+**OUTPUTS**:
+- **7687_cram_manifest_INFO_from_iRODS_all.txt** : Contains the information of all the samples across both SW837 and OMM2.5 targeting experiments.
+- **7687_cram_manifest_INFO_from_iRODS.txt** : Contains the information of the samples on the OMM2.5 targeting experiments.
 
 - To generate the list of jobs to transform the CRAM files to fastq files the files we ran
 
@@ -178,12 +178,16 @@ find ${PROJECTDIR}/bams/NOD_mapping/NOD_PDXV1/*/* -name "*.bam" -exec samtools i
 ### Filter the mouse reads from the Xenofilter jobs for the samples
 
 Given the amount of sequencing data generated for the grafted samples, we required to split both Human and mouse BAM files with the same matching read numbers and read names to be able to run XenofilteR successfully.  This is due to a known issue with XenofilteR when and one of it's dependencies, `Rsamtools`, see issue [here](https://github.com/NKI-GCF/XenofilteR/issues/7) 
+#### Sequencing strategy
 
-#### Split input BAM files, split by read names from canapps bam file and run XenofilteR for PDX filtering from Manifest
+Diagram showing the sequencing strategy used for the samples in the project
+![image](../documentation/diagrams/RNASeq_Blocked_design_seq.png)
+
+#### Split input BAM files, split by read names from Human BAM files and run XenofilteR for mouse read filtering
 
 To split the reads we used the script: **split_bam_files_and_get_xenofilter_jobs_RNAseq.R**. 
 
-The script takes the a manifest with BAM file information and generates the jobs to take the unfiltered human BAM files, sort by read name, obtain a plain text file with the read names for all the reads present in the file, then it will split this file in the number of files required that have a maximum of `NREADS_SPLIT` (50 million) per file. Subsequently it will split the Human and Mouse BAM files by read names and then generate the jobs to run XenofilteR to filter out the mouse reads for the matching Human & Mouse BAM files.
+The script takes the a manifest with BAM file information and generates the jobs to take the unfiltered human BAM files, sort by read name, obtain a plain text file with the read names for all the reads present in the file, then it will split this file in the number of files required that have a maximum of `NREADS_SPLIT` (50 million) per file.**This approach was followed as the samples were sequenced across a sinlge land and only a single readgroup was present.**  Subsequently it will split the Human and Mouse BAM files by read names and then generate the jobs to run XenofilteR to filter out the mouse reads for the matching Human & Mouse BAM files.
 
 **INPUT**: `metadata/manifests/7687_cram_manifest_INFO_from_iRODS_all_wbam_counts_qc_wNOD_bams.txt`
 
@@ -233,7 +237,6 @@ source ${PROJECTDIR:?unset}/scripts/pdx_processing/source_me.sh
 bash ${PROJECTDIR:?unset}/scripts/pdx_processing/${STUDY}_bamsplittin_by_read_names_jobs.sh
 
 ```
-
 Submit Xenofilter filtering of split bamfiles using `7687_Xenofilter_by_read_names_parts_jobs.sh`
 
 ```bash
