@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/935383929.svg)](https://doi.org/10.5281/zenodo.15007424)
+
 # Analysis of the transcriptional effects of _CDS2_ targeting - RNAseq
 
 ## Overview 
