@@ -9,10 +9,50 @@ Icon
 .Rproj.user
 .Rhistory
 .RData
+*.RData
 .Ruserdata
+
 renv
+bams
+BAMS
+fastqs
+logs
 *.fastq.gz
 *.fq.gz
 *.bam
 *.cram
 .Rprofile
+temp
+
+# Python
+.venv
+
+documentation/CRISPResso2_image_installation.md
+
+#Reference generation scripts
+reference/NOD_ShiLtJ_V1_PDX_ref/*
+!reference/NOD_ShiLtJ_V1_PDX_ref/PDX_from_LatAm_mouse_reference_generation_NOD_ShiLtJ_v1.Rmd
+!reference/NOD_ShiLtJ_V1_PDX_ref/PDX_from_LatAm_mouse_reference_generation_NOD_ShiLtJ_v1.html
+!reference/NOD_ShiLtJ_V1_PDX_ref/renv.lock
+!reference/NOD_ShiLtJ_V1_PDX_ref/README.md
+
+#Kallisto singularity image
+reference/kallisto/*
+
+
+# Singularity images processing scripts
+scripts/singularity_images/*
+scripts/singularity_images/*/*.sif
+!scripts/singularity_images/kallisto
+
+analysis/expression_analysis_ensv112
+analysis/kallisto_ensv112
+
+# Pytest & Python ignores
+__pycache__
+.pytest_cache
+.venv
+tests/de-logs/*
+tests/bsub-logs/*
+tests/bsub-results/*
+tests/tmp-results/*

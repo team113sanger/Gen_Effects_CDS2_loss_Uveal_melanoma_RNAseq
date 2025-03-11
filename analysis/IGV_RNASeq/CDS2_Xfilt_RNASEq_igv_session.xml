@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="hg38" locus="All" version="8">
+    <Resources>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_R2_RNA/Filtered_bams/CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R4_RNA/Filtered_bams/CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R2_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R4_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_R1_RNA/Filtered_bams/CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R3_RNA/Filtered_bams/CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R3_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R2_RNA/Filtered_bams/CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R2_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R1_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R1_RNA/Filtered_bams/CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+        <Resource path="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R1_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam" type="bam"/>
+    </Resources>
+    <Panel height="160" name="Panel1730674820484" width="1063">
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R1_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Cas9_WT_R1_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R1_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R1_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Cas9_WT_R1_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674821153" width="1063">
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R2_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Cas9_WT_R2_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R2_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R2_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Cas9_WT_R2_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674821859" width="1063">
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R3_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Cas9_WT_R3_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R3_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R3_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Cas9_WT_R3_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674822530" width="1063">
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R4_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Cas9_WT_R4_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R4_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Cas9_WT_R4_RNA/Filtered_bams/CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Cas9_WT_R4_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674823210" width="1063">
+        <Track attributeKey="CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R1_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Non-treated_R1_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R1_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R1_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Non-treated_R1_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674823825" width="1063">
+        <Track attributeKey="CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R2_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Non-treated_R2_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R2_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Non-treated_R2_RNA/Filtered_bams/CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Non-treated_R2_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674824488" width="1063">
+        <Track attributeKey="CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_R1_RNA/Filtered_bams/CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_R1_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_R1_RNA/Filtered_bams/CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_R1_RNA/Filtered_bams/CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_R1_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="100" name="Panel1730674825114" width="1063">
+        <Track attributeKey="CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_R2_RNA/Filtered_bams/CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_R2_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_R2_RNA/Filtered_bams/CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam Junctions" visible="false"/>
+        <Track attributeKey="CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="OTHER" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_R2_RNA/Filtered_bams/CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_R2_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674825811" width="1063">
+        <Track attributeKey="CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R1_RNA/Filtered_bams/CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Treated_R1_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R1_RNA/Filtered_bams/CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R1_RNA/Filtered_bams/CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Treated_R1_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674826507" width="1063">
+        <Track attributeKey="CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R2_RNA/Filtered_bams/CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Treated_R2_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R2_RNA/Filtered_bams/CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R2_RNA/Filtered_bams/CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Treated_R2_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674827162" width="1063">
+        <Track attributeKey="CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R3_RNA/Filtered_bams/CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Treated_R3_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R3_RNA/Filtered_bams/CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R3_RNA/Filtered_bams/CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Treated_R3_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="160" name="Panel1730674827820" width="1063">
+        <Track attributeKey="CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam Coverage" autoScale="true" clazz="org.broad.igv.sam.CoverageTrack" displayMode="EXPANDED" fontSize="11" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R4_RNA/Filtered_bams/CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam_coverage" name="CDS2_Tumour_Treated_R4_RNA Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam Junctions" autoScale="false" clazz="org.broad.igv.sam.SpliceJunctionTrack" displayMode="SQUISHED" fontSize="12" groupByStrand="false" height="60" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R4_RNA/Filtered_bams/CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam_junctions" maxdepth="50" name="CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam Junctions" visible="true"/>
+        <Track attributeKey="CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" displayMode="EXPANDED" experimentType="RNA" fontSize="12" id="../../bams/RNASEQ_xfilt/CDS2_Tumour_Treated_R4_RNA/Filtered_bams/CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam" name="CDS2_Tumour_Treated_R4_RNA.sample.mXfilt_Filtered.bam" visible="true">
+            <RenderOptions/>
+        </Track>
+    </Panel>
+    <Panel height="50" name="FeaturePanel" width="1063">
+        <Track attributeKey="Reference sequence" clazz="org.broad.igv.track.SequenceTrack" displayMode="EXPANDED" fontSize="12" id="Reference sequence" name="Reference sequence" sequenceTranslationStrandValue="+" shouldShowTranslation="false" visible="true"/>
+        <Track attributeKey="Refseq Genes" clazz="org.broad.igv.track.FeatureTrack" fontSize="12" groupByStrand="false" id="https://s3.amazonaws.com/igv.org.genomes/hg38/ncbiRefSeq.sorted.txt.gz" name="Refseq Genes" visible="true"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.008348240906380441,0.0828861061419201,0.16636851520572452,0.24985092426952893,0.3333333333333333,0.41681574239713776,0.5002981514609421,0.5837805605247466,0.6344663088849135,0.717948717948718,0.8014311270125224,0.8849135360763267,0.9683959451401312"/>
+    <HiddenAttributes>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+        <Attribute name="NAME"/>
+    </HiddenAttributes>
+</Session>

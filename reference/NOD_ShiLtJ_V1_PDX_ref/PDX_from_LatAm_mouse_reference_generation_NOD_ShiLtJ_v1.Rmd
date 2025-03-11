@@ -1,0 +1,274 @@
+---
+title: "Mouse NOD/ShiLtJ v1 reference generation for PDX sequencing studies"
+author: "Martin Del Castillo Velasco-Herrera - Team 113 David Adams lab"
+date: "June 2024"
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+    number_sections: yes
+    self_contained: yes
+  # pdf_document:
+  #   toc: yes
+  #   toc_depth: '3'
+params:
+  generate: FALSE
+  refdir : ""
+fontsize: 14pt
+---
+<!-- Created and written by  Martin Del Castillo Velasco-Herrera - mdc1@sanger.ac.uk -->
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#PREPARE the environment 
+if(!require("BiocManager", quietly = T)){ install.packages("BiocManager") }
+bcpkgs<-c("knitr",
+          "tidyverse",
+          "tidyr",
+          "dplyr",
+          "here",
+          "rmarkdown",
+          "kableExtra",
+          "Biostrings",
+          "gridExtra")
+suppressMessages( BiocManager::install(setdiff(bcpkgs, rownames(installed.packages())), dependencies=TRUE, version = '3.16', update =FALSE) )
+pkgs<-c( "data.table",
+         "shiny",
+         "DT",
+         "htmlwidgets",
+         "patchwork",
+         "R.utils"
+         )
+suppressMessages( install.packages(setdiff(pkgs, rownames(installed.packages())), update =FALSE, dependencies = TRUE, repos="https://www.stats.bris.ac.uk/R/"))
+                                   
+library(Biostrings)
+library(tidyr)
+library(dplyr)
+library(knitr)
+library(R.utils)
+library(patchwork)
+library(here)
+
+#Download the sequencing report 
+nodshiltv1_seq_report<- read.table(file="ftp://ftp.ebi.ac.uk/pub/databases/ena/assembly/GCA_001/GCA_001624/GCA_001624675.1_sequence_report.txt", header=TRUE, sep="\t")
+
+##irst fill the missing replicon names cells 
+mpos<-is.na(nodshiltv1_seq_report$replicon.name)
+#Add the Accession number  wihtout the ".Num" as the  replicon name to sequences with empty replicon name
+nodshiltv1_seq_report$replicon.name[mpos]<- nodshiltv1_seq_report$accession[mpos]
+nodshiltv1_seq_report$replicon.type[mpos]<- "unlocalized"
+#Add the Accession without the ".Num" as the sequence name to sequences with empty sequencename
+nodshiltv1_seq_report$sequence.name[mpos]<- paste("Un", (lapply(strsplit(nodshiltv1_seq_report$accession[mpos], split =".", fixed = T ), function(x){ x[[1]]} ) %>% unlist), sep="_") 
+
+#Set the  variable of REFDIR for the bash opts_chunk
+refdir<-params$refdir
+Sys.setenv(REFDIR = refdir)
+
+
+```
+Patient Derived Xenografts (PDX) experiments consist in the inoculation of patient tumour cells in mice to study the tumour growth characteristics _in vivo_. In the current project cancer cell lines were grafted onto **_NOD/ShiLtJ_ mice** and then obtained for DNA & RNA extractions. Because of this for any sequencing analyses, it is required to perform a filtering step to remove any potential reads from mouse DNA. This document details the process to obtain and prepare the reference fasta used for this porpuse on this project. 
+
+# Sequences included for the NOD/ShiLtJ V1 mouse reference genome for PDX filtering
+
+## NOD/ShiLtJ reference build information - NOD_ShiLtJ_V1
+
+The latest assembly of the reference genome for the **NOD/ShiLtJ** strain is the [**NOD_ShiLtJ_V1 (Assembly Accession GCA_001624675.1)**](https://www.ebi.ac.uk/ena/browser/view/GCA_001624675) released on 2016. This will be downloaded from **ENSEMBL's release version 107**,  [ref genome](http://ftp.ensembl.org/pub/release-107/fasta/mus_musculus_nodshiltj/dna/Mus_musculus_nodshiltj.NOD_ShiLtJ_v1.dna.toplevel.fa.gz) and [annotation GTF](http://ftp.ensembl.org/pub/release-107/gtf/mus_musculus_nodshiltj/Mus_musculus_nodshiltj.NOD_ShiLtJ_v1.107.gtf.gz) .
+
+**NOTE: The following commands should be run within the folder that you want to store the reference**
+
+### Assembly sequencing report
+It is important to note that the assembly is comprised by **`r dim(nodshiltv1_seq_report)[1]` assembled scaffolds** comprising a total of:
+
++ Total **assembled Chromosomes:**  `r table(nodshiltv1_seq_report$replicon.type)[1]`
++ **Mitochondrial genomes**:   `r table(nodshiltv1_seq_report$replicon.type)[2]`
++ **Unlocalised** scaffolds:  `r table(nodshiltv1_seq_report$replicon.type)[3]`
+
+<span style="color:red"> **Important NOTE:** This assembly does not include the sequence of chromosome Y </span>
+
+```{r, nod_shilt_v3_report, echo=TRUE }
+nodshiltv1_seq_report<- read.table("ftp://ftp.ebi.ac.uk/pub/databases/ena/assembly/GCA_001/GCA_001624/GCA_001624675.1_sequence_report.txt", header=TRUE, sep="\t")
+
+##irst fill the missing replicon names cells 
+mpos<-is.na(nodshiltv1_seq_report$replicon.name)
+#Add the Accession number  wihtout the ".Num" as the  replicon name to sequences with empty replicon name
+nodshiltv1_seq_report$replicon.name[mpos]<- nodshiltv1_seq_report$accession[mpos]
+nodshiltv1_seq_report$replicon.type[mpos]<- "unlocalized"
+#Add the Accession without the ".Num" as the sequence name to sequences with empty sequencename
+nodshiltv1_seq_report$sequence.name[mpos]<- paste("Un", (lapply(strsplit(nodshiltv1_seq_report$accession[mpos], split =".", fixed = T ), function(x){ x[[1]]} ) %>% unlist), sep="_") 
+
+DT::datatable(nodshiltv1_seq_report, 
+              class = "cell-border stripe", #Style of table to show
+              filter = 'top',
+              rownames = TRUE, 
+              editable = FALSE, 
+              extension = "Buttons", 
+              options = list(dom="Bflrtip", #Shows Buttons, filtering input, table
+                             buttons =c("copy", "csv", "excel")))
+```
+
+# Process to prepare the reference FASTA file used for indexing
+
+## Obtaining the reference FASTA files with all the scaffolds
+
+To obtain the main assembled chromosomes and the additional scaffolds I ran the following commands on the **_shell/bash_** command line . 
+
+``` {bash, FASTA_downloading, echo=TRUE, eval=params$generate, class.source = "fold-show" }
+#Define the working variables in bash command line 
+#Set the folder where you want to create the reference directory
+echo $REFDIR
+REFNAME="NOD_ShiLtJ_V1"
+REFWDIR=$REFDIR
+mkdir -p $REFWDIR
+cd $REFWDIR
+
+#Download the chromosomes FASTA files
+wget -O NOD_ShiLtJ_V1p1.fa.gz "http://ftp.ensembl.org/pub/release-107/fasta/mus_musculus_nodshiltj/dna/Mus_musculus_nodshiltj.NOD_ShiLtJ_v1.dna.toplevel.fa.gz" 
+#Download the Mitochondria fasta file 
+wget -O NOD_ShiLtJ_V1nonch.fa "https://www.ebi.ac.uk/ena/browser/api/fasta/CM004185.1?download=true" 
+gzip -d NOD_ShiLtJ_V1p1.fa.gz
+
+
+cat NOD_ShiLtJ_V1p1.fa NOD_ShiLtJ_V1nonch.fa >NOD_ShiLtJ_V1.fa
+rm NOD_ShiLtJ_V1p1.fa NOD_ShiLtJ_V1nonch.fa
+
+```
+
+## Modify the sequence headers for compatibility with Xenofilter
+
+After obtaining the reference FASTA file it is important to change the current FASTA sequence name format to one compatible for ** Xenofilter**. 
+
+**The sequence headers of the current reference FASTA file look like this:**
+```{r down_head_reheader, echo=TRUE}
+refname<- "NOD_ShiLtJ_V1.fa"
+refdir<-params$refdir
+system( paste0("head -n 1 ",  file.path(refdir,refname) ), intern = T )
+```
+
+**We require to change this to have the following standard**
+```{r reheaded_example, echo=TRUE }
+printf(">chr1  AC:CM000663.2  gi:568336023  LN:248956422  rl:Chromosome  M5:6aef897c3d6ff0c78aff06ac189178dd  AS:GRCh38")
+```
+
+
+1. I proceed to change the format for the sequence header with the following code using the headers and the information from the **`r refname``** sequencing report.
+
+```{r seq_name_reformat, echo=TRUE, class.source="fold-show"}
+nod_reffile<-file.path(refdir, refname)
+nod_ref<-readDNAStringSet(filepath=nod_reffile , format= "fasta" )
+#Get the accessionIDs present in the seuqence headers 
+temp_acids<-lapply(strsplit(names(nod_ref), split =" ", fixed = T ), function(x){ x[[1]]} ) %>% unlist
+#Set the name of the Mitochondrian accession ID 
+temp_acids[length(temp_acids)]<-"MT"
+#Use the accession numbers to extract the information from the reference sequencing report and use it generate the new names
+#In the form:
+#>chrNum  AC:Accession_Num  LN:Length  rl:Replicon_Locationtype  AS:Assembly_ID
+temp_nseqnames<-vector(mode="character", length = length(temp_acids))
+for(i in 1:length(temp_acids)){
+  #Initialize the variables to save the new fields 
+  temp<-NULL
+  tempnam<-NULL
+  tempchr<-NULL
+  tempacn<-NULL
+  templn<-NULL
+  temprl<-NULL
+  tempas<-"AS:NOD_ShiLtJ_V1"
+  #Set the values for the ith Accession ID on the FASTA header
+  temp<- nodshiltv1_seq_report[ nodshiltv1_seq_report$replicon.name %in% temp_acids[i],  ]
+  #The GTF contains no "chr" so the chr needs to be omitted for mapping 
+  tempchr<-paste0(temp$sequence.name)
+  tempacn<-paste0("AC:",temp$accession)
+  templn<-paste0("LN:", temp$sequence.length)
+  temprl<-paste0("rl:", temp$replicon.type)
+  tempnam<-paste(tempchr, tempacn, templn, temprl, tempas, sep= "  ")
+  temp_nseqnames[i]<- tempnam
+}
+#Remove temp variables
+rm( temp,tempnam, tempchr,tempacn, templn, temprl )
+
+#Assing the new format to the reference
+names(nod_ref)<-temp_nseqnames
+
+```
+
+
+2. Download the **Y chromosome  ** from **[GRCm39 (GCA_000001635.9)](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/) reference** to incorporate the Y chromosome into the **`r refname`** reference genome. 
+
+```{r get_chrY_from_GRCm39, echo=TRUE, class.source="fold-show"}
+#First we need to get the chrY from the  GRCm39 FASTA file with all chromosomes 
+cmd<-paste0("wget -O ",file.path(refdir, "chrY.fna.gz"), " https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_assembly_structure/Primary_Assembly/assembled_chromosomes/FASTA/chrY.fna.gz ; gzip -d ", file.path(refdir, "chrY.fna.gz"))
+suppressMessages(system(cmd))
+
+#Read the chrY sequence 
+chry_grcm39<-readDNAStringSet(filepath=file.path(refdir, "chrY.fna"), format= "fasta" )
+#change the header to match the previous information 
+#The GTF contains no "chr" so the chr needs to be omitted for mapping 
+names(chry_grcm39)[1]<- c("Y  AC:CM001014.3  LN:91455967  rl:Chromosome  AS:GRCm39")
+chry_grcm39
+```
+
+3. Add the **Y chromosome from GRCm39 to the final reference genome**
+
+```{r form_final_PDX_NOD_GRCm39ref_genome, echo=TRUE, class.source="fold-show"}
+#Create the final List of sequences to include in the reference Genome for PDX
+final_ref_genome<- unlist(DNAStringSetList(nod_ref[1:20], chry_grcm39,nod_ref[21:length(names(nod_ref))] ) )
+final_ref_genome_dir<-file.path(refdir,gsub(".fa","_PDX_ref", refname, fixed = T))
+#Create the directory for the final genome 
+dir.create(final_ref_genome_dir, recursive = T)
+#Write the FASTA file 
+writeXStringSet(final_ref_genome, 
+                filepath = file.path(final_ref_genome_dir,"genome.fa"),
+                format = "fasta" )
+
+```
+
+## Download the GTF annotation files for NOD_ShiLtJ_V1 from ENSEMBLs v107 
+
+To generate the the GTF file with the ENSEMBL annotations for the **NOD_ShiLtJ_V1** assembly and  **GRCm39 reference's**  chromosome Y annotation, you need to run the following. 
+```{r GTF_NODv1, echo=TRUE, eval=params$generate, class.source="fold-show"}
+nod_annot_name<-"NOD_ShiLtJ_v1.ENSv107.gtf"
+pdx_annot_name<-"NOD_ShiLtJ_V1_PDX.ENSv107.gtf"
+chry_annot_name<-"chrY.gtf"
+#Download the annotation of the genome
+# for GTF with the annotation http://ftp.ensembl.org/pub/release-107/gtf/mus_musculus_nodshiltj/Mus_musculus_nodshiltj.NOD_ShiLtJ_v1.107.gtf.gz 
+cmd<-paste0("wget --output-document ",file.path(final_ref_genome_dir, "NOD_ShiLtJ_v1.ENSv107.gtf.gz"), " 'http://ftp.ensembl.org/pub/release-107/gtf/mus_musculus_nodshiltj/Mus_musculus_nodshiltj.NOD_ShiLtJ_v1.107.gtf.gz' ; gzip -d ",file.path(final_ref_genome_dir, "NOD_ShiLtJ_v1.ENSv107.gtf.gz"))
+suppressMessages(system(cmd))
+
+# for GTF with the chrY annotation GRCm39 http://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/Mus_musculus.GRCm39.107.gtf.gz
+cmd<-paste0("wget --output-document ",file.path(final_ref_genome_dir, "GRCm39.gtf.gz"), " 'http://ftp.ensembl.org/pub/release-107/gtf/mus_musculus/Mus_musculus.GRCm39.107.gtf.gz' ; gzip -d ",file.path(final_ref_genome_dir, "GRCm39.gtf.gz") )
+suppressMessages(system(cmd))
+
+#Get the chrY annotations
+cmd<-paste0("grep -P 'Y\t' ",  file.path(final_ref_genome_dir, "GRCm39.gtf"), " >", file.path(final_ref_genome_dir, chry_annot_name))
+suppressMessages(system(cmd))
+
+#Concatenation the NOD and ChrY annotations
+cmd<- paste0( "cat ", paste( file.path(final_ref_genome_dir, "NOD_ShiLtJ_v1.ENSv107.gtf"), file.path(final_ref_genome_dir, chry_annot_name), sep=" " ), " >", file.path(final_ref_genome_dir, pdx_annot_name) )
+suppressMessages(system(cmd))
+
+#Clear the intermediate files
+cmd<- paste0( "rm ", paste( file.path(final_ref_genome_dir, "NOD_ShiLtJ_v1.ENSv107.gtf"), file.path(final_ref_genome_dir, chry_annot_name), file.path(final_ref_genome_dir, "GRCm39.gtf"),  sep=" " ) )
+suppressMessages(system(cmd))
+
+```
+```{r cleanup, echo=FALSE, eval=TRUE, include=FALSE }
+# Clean the files 
+system( paste0("rm ", file.path(refdir, refname) ))
+#Clear the Y chromosome fasta
+system( paste0("rm ", file.path(refdir, "chrY.fna") ))
+```
+
+
+# Summary
+
+The mouse reference genome created for PDX filtering is located at:
+
++ **FASTA file full path:** `r paste0(gsub(".fa","_PDX_ref", refname, fixed = T), "genome.fa")`
++ **Annotation GTF file full path:** `r print(file.path(final_ref_genome_dir, pdx_annot_name))`
++ **Total sequence in (bp) it contains:** `r sum(width(final_ref_genome))`
++ **Total number of scaffolds from NOD_ShiLtJ_V1:** `r dim(nodshiltv1_seq_report)[1]`
++ **Total number of scaffolds from GRCm39:** 1 (chrY)
+
